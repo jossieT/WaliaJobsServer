@@ -3,10 +3,10 @@ const dbConnect = async () =>{
 
         try{
             mongoose.connect(process.env.MONGO_URL);
-            console.log("Db connection successful");
+            console.log("Walia db connection successful");
         }
         catch(error){
-            console.log(`Db connection error. message: ${error.message}`);
+            console.log(`Walia Wdb connection error. message: ${error.message}`);
         }
 }
 
