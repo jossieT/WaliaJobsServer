@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 // Define the schema for the benefits
 
-const BenefitsSchema = new mongoose.Schema({
+const benefitsSchema = new Schema({
   "International Relocation": {
     type: Boolean,
     default: false
@@ -55,11 +55,8 @@ const BenefitsSchema = new mongoose.Schema({
 });
 
 // Schema for the review
-const ReviewSchema = new mongoose.Schema({
-  id: {
-    type: Number,
-    required: true
-  },
+const reviewSchema = new Schema({
+  
   companyId: {
     type: Number,
     required: true
@@ -97,12 +94,12 @@ const ReviewSchema = new mongoose.Schema({
     required: true
   },
   benefits: {
-    type: BenefitsSchema,
+    type: benefitsSchema,
     required: true
   }
-});
+},{ timestamps: true });
 
 // Create the model for the review
-const Review = mongoose.model('Review', ReviewSchema);
+const Review = mongoose.model('Review', reviewSchema);
 
 module.exports = Review;
