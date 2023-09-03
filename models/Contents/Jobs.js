@@ -59,7 +59,11 @@ const jobSchema = new Schema({
         required: true
     },
     applicants: {
+        type: String
+    },
+    postedBy: {
         type: String,
+        required: true
     },
     img: {
         type: String,

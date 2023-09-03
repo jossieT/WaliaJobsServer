@@ -6,7 +6,7 @@ const dbConnect = async () =>{
             console.log("Walia db connection successful");
         }
         catch(error){
-            console.log(`Walia Wdb connection error. message: ${error.message}`);
+            console.log(`Walia db connection error. message: ${error.message}`);
         }
 }
 
