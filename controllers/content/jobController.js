@@ -1,13 +1,16 @@
 const AysncHandler = require("express-async-handler");
 const Job = require("../../models/Contents/Jobs");
+const { response } = require("express");
 //const Admin = require("../../model/Staff/Admin");
+const fs = require('fs');
+const { uploadImage, imageUrl } = require("../uploadController");
 
 //@desc  Create Job
 //@route POST /api/v1/Jobs
 //@acess  Private
 
 exports.createJob = AysncHandler(async (req, res) => {
-  const {
+   const {
      title, 
      rating,
      companyName,
@@ -23,9 +26,13 @@ exports.createJob = AysncHandler(async (req, res) => {
      review,
      salary,
      applicants,
-     postedBy,
-     img
+     postedBy
     } = req.body;
+
+    let uploadedImageUrl;
+    if (req.file) {
+      uploadedImageUrl = await req.imageData.secure_url;
+  }
   //checking if job exists
   const jobFound = await Job.findOne({ title });
   if (jobFound) {
@@ -49,14 +56,14 @@ exports.createJob = AysncHandler(async (req, res) => {
      salary,
      applicants,
      postedBy,
-     img
+     img: uploadedImageUrl
   });
-
-  res.status(201).json({
+  
+    res.status(201).json({
     status: "success",
     message: "Job created successfully",
     data: jobCreated
-  });
+  })
 });
 
 //@desc  fetch all Jobs
@@ -71,10 +78,11 @@ exports.getAllJobs = AysncHandler(async (req, res) => {
     data: allJobs
   });
 });
-
+ 
 //@desc  fetch single Job
 //@route GET /api/v1/Jobs/:id
 //@acess  Private
+
 exports.getSingleJob = AysncHandler(async (req, res) => {
   const job = await Job.findById(req.params.id);
   res.status(201).json({
@@ -105,14 +113,20 @@ exports.updateJob = AysncHandler(async (req, res) => {
         review,
         salary,
         applicants,
-        postedBy,
-        img
+        postedBy
        } = req.body;
-  //check name exists
-//   const JobFound = await ClassLevel.findOne({ name });
-//   if (JobFound) {
-//     throw new Error("Job already exists");
-//   }
+
+       let uploadedImageUrl;
+       if (req.file) {
+        let job = await Job.findById(req.params.id);
+        let oldImageUrl = job.img;
+        if(oldImageUrl){
+          fs.unlinkSync(oldImageUrl);
+        }
+        let path = req.file.path;
+        uploadedImageUrl = path;
+       }
+
   const updatedJob = await Job.findByIdAndUpdate(req.params.id,
     {
         title, 
@@ -131,7 +145,7 @@ exports.updateJob = AysncHandler(async (req, res) => {
         salary,
         applicants,
         postedBy,
-        img
+        img: uploadedImageUrl
     },
     {
       new: true,
@@ -145,17 +159,39 @@ exports.updateJob = AysncHandler(async (req, res) => {
   });
 });
 
-//@desc  Delete Job
+//@desc  Delete single Job
 //@route DELETE /api/v1/Jobs/:id
 //@acess  Private
+
 exports.deleteJob = AysncHandler(async (req, res) => {
-  await Job.findByIdAndDelete(req.params.id);
+  const job = await Job.findById(req.params.id);
+  if(!job){
+    throw new Error("No user found!");
+  }
+  if(job.img){
+    fs.unlinkSync(job.img);
+  }
+  await job.deleteOne();
+  //await Job.findByIdAndDelete(req.params.id);
   res.status(201).json({
     status: "success",
     message: "Job deleted successfully",
   });
 });
 
+//@desc  Delete all Jobs
+//@route DELETE /api/v1/Jobs/
+//@acess  Private
+
+exports.deleteAllJobs = AysncHandler(async (req, res) => {
+  await Job.deleteMany({});
+  //await Job.findByIdAndDelete(req.params.id);
+  res.status(201).json({
+    status: "success",
+    message: "All Jobs deleted successfully",
+  });
+});
+    
 //@desc  Search Job
 //@route GET /api/v1/Jobs/:key
 //@acess  Public

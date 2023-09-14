@@ -66,8 +66,7 @@ const jobSchema = new Schema({
         required: true
     },
     img: {
-        type: String,
-        required: true
+        type: String
     },
 },
 { timestamps: true });

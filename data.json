@@ -1,0 +1,55 @@
+
+{
+    "title": "dev", 
+    "rating": "4",
+    "companyName": "CBE",
+    "companyType": "Corporate",
+    "jobType": "Full Time",
+    "workMode": "In Office",
+    "department": "IT",
+    "experience": "0",
+    "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequatur aperiam numquam harum nisi fugit doloremque porro ipsam laudantium minus iusto aliquid beatae, sunt a accusantium in corrupti nihil assumenda corporis!",
+    "location": "Addis Abeba",
+    "jobTags": "Programming",
+    "timeLeft": "2 days",
+    "review": "20",
+    "salary": "not disclosed",
+    "applicants": "200",
+    "postedBy": "Admin"
+}
+
+{
+    title: req.body.title,
+    rating: req.body.rating,
+    companyName: req.body.companyName,
+    companyType: req.body.companyType,
+    jobType: req.body.jobType,
+    workMode: req.body.workMode,
+    department: req.body.department,
+    experience: req.body.experience,
+    description: req.body.description,
+    location: req.body.location,
+    jobTags: req.body.jobTags,
+    timeLeft: req.body.timeLeft,
+    review: req.body.review,
+    salary: req.body.salary,
+    applicants: req.body.applicants,
+    postedBy: req.body.postedBy
+ }
+
+ title:engineer
+rating:4
+companyName:CBE
+companyType:Corporate
+jobType:Full Time
+workMode:In Office
+department:IT
+experience:0
+description:Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequatur aperiam numquam harum nisi fugit doloremque porro ipsam laudantium minus iusto aliquid beatae, sunt a accusantium in corrupti nihil assumenda corporis!
+location:Addis Abeba
+jobTags:Programming
+timeLeft:2 days
+review:20
+salary:not disclosed
+applicants:200
+postedBy:Admin

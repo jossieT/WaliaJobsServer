@@ -1,12 +1,18 @@
 const express = require("express");
+const { uploadImage } = require('../../controllers/uploadController');
+const { upload } = require('../../service/uploadService');
+
 const {
     createJob,
     getAllJobs,
     getSingleJob,
     updateJob,
     deleteJob,
-    searchJob
+    deleteImage,
+    searchJob,
+    deleteAllJobs
 } = require("../../controllers/content/jobController");
+const imageUpload = require("../../middlewares/imageUpload");
 
 // const isAdmin = require("../../middlewares/isAdmin");
 // const isLoggedin = require("../../middlewares/isLogin");
@@ -16,13 +22,14 @@ const jobRouter = express.Router();
 
 jobRouter
   .route("/")
-  .post(createJob)
-  .get(getAllJobs);
+  .post(upload.single('img'), uploadImage, createJob)
+  .get(getAllJobs)
+  .delete(deleteAllJobs);
 
   jobRouter
   .route("/:id")
   .get(getSingleJob)
-  .put(updateJob)
+  .put(imageUpload.single('img'), updateJob)
   .delete(deleteJob);
 
   jobRouter.get("/search/:key", searchJob);
