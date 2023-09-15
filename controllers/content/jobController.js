@@ -4,6 +4,7 @@ const { response } = require("express");
 //const Admin = require("../../model/Staff/Admin");
 const fs = require('fs');
 const { uploadImage, imageUrl } = require("../uploadController");
+const { deleteImage } = require("../../service/deleteService");
 
 //@desc  Create Job
 //@route POST /api/v1/Jobs
@@ -85,6 +86,9 @@ exports.getAllJobs = AysncHandler(async (req, res) => {
 
 exports.getSingleJob = AysncHandler(async (req, res) => {
   const job = await Job.findById(req.params.id);
+  if(!job){
+    throw new Error("Job not found!");
+  }
   res.status(201).json({
     status: "success",
     message: "Job fetched successfully",
@@ -121,10 +125,9 @@ exports.updateJob = AysncHandler(async (req, res) => {
         let job = await Job.findById(req.params.id);
         let oldImageUrl = job.img;
         if(oldImageUrl){
-          fs.unlinkSync(oldImageUrl);
+          deleteImage(job.img);
         }
-        let path = req.file.path;
-        uploadedImageUrl = path;
+        uploadedImageUrl = await req.imageData.secure_url;
        }
 
   const updatedJob = await Job.findByIdAndUpdate(req.params.id,
@@ -169,7 +172,7 @@ exports.deleteJob = AysncHandler(async (req, res) => {
     throw new Error("No user found!");
   }
   if(job.img){
-    fs.unlinkSync(job.img);
+    deleteImage(job.img);
   }
   await job.deleteOne();
   //await Job.findByIdAndDelete(req.params.id);

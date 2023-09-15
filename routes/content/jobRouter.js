@@ -29,7 +29,7 @@ jobRouter
   jobRouter
   .route("/:id")
   .get(getSingleJob)
-  .put(imageUpload.single('img'), updateJob)
+  .put(upload.single('img'), uploadImage, updateJob)
   .delete(deleteJob);
 
   jobRouter.get("/search/:key", searchJob);

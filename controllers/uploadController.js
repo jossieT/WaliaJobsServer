@@ -1,6 +1,7 @@
 const AysncHandler = require("express-async-handler");
 const { uploadToCloudinary } = require("../service/uploadService");
-const { bufferToDataURI } = require('../utils/file')
+const { bufferToDataURI } = require('../utils/file');
+const cloudinary = require('cloudinary').v2;
 
 const uploadImage = AysncHandler (async (req, res, next) => {
 
@@ -13,19 +14,15 @@ const uploadImage = AysncHandler (async (req, res, next) => {
     
         imageDetails = await uploadToCloudinary(base64, fileFormat)
         req.imageData = imageDetails;
+        console.log("Image Uploaded Sucessfully");
         next();
-        // res.json({
-        //   status: 'success',
-        //   message: 'Upload successful',
-        //   data: imageDetails.secure_url
-        // })
         }else{
           next();
         }
       } catch (error) {
         throw new Error("Error uploading Image: " + error.message);
       }
-    })
+    });
 
 module.exports = {
   uploadImage,
