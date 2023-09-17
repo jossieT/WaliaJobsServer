@@ -6,6 +6,7 @@ const { globalErrHandler,
 const jobRouter = require('../routes/content/jobRouter');
 const imageUpload = require('../middlewares/imageUpload');
 const bodyParser = require('body-parser');
+const companyRouter = require('../routes/content/companyRouter');
 //const uploadRouter = require('../routes/upload.route');
 const app = express();
 
@@ -30,6 +31,7 @@ app.use((req, res, next)=>{
 });
 //app.use('/uploads', express.static('/uploads/images'));
 app.use("/api/v1/job", jobRouter);
+app.use("/api/v1/companies", companyRouter);
 
 //app.use('/upload', uploadRouter)
 

@@ -8,7 +8,6 @@ const {
     getSingleJob,
     updateJob,
     deleteJob,
-    deleteImage,
     searchJob,
     deleteAllJobs
 } = require("../../controllers/content/jobController");

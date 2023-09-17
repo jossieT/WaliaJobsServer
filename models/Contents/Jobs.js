@@ -43,12 +43,34 @@ const jobSchema = new Schema({
         required: true
     },
     jobTags: {
+        type: [String],
+        default: ["programming", "excel", "troubleshoot"]
+    },
+    role: {
+        type: String
+    },
+    education: {
+        type: [String]
+    },
+    responsiblities: {
+        type: [String]
+    },
+    requirements: {
+        type: [String]
+    },
+    preferredSkills: {
+        type: [String]
+    },
+    jobPostDate: {
+        type: Date,
+        default: Date.now
+    },
+    closingDate: {
         type: String,
         required: true
     },
-    timeLeft: {
-        type: String,
-        required: true
+    applicationFormLink: {
+        type: String
     },
     review: {
         type: String,

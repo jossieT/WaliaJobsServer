@@ -19,7 +19,7 @@ const companySchema = new Schema({
     headOffice: {
         type: String,
     },
-    logo: {
+    companyLogo: {
         type: String,
         required: true
     },
