@@ -40,6 +40,10 @@ exports.createJob = AysncHandler(async (req, res) => {
     if (req.file) {
       uploadedImageUrl = await req.imageData.secure_url;
   }
+
+  const date = new Date();
+  const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+  const formattedDate = date.toLocaleString('en-US', options);
   //checking if job exists
   const jobFound = await Job.findOne({ title });
   if (jobFound) {
@@ -69,6 +73,7 @@ exports.createJob = AysncHandler(async (req, res) => {
      salary,
      applicants,
      postedBy,
+     jobPostDate: formattedDate,
      img: uploadedImageUrl
   });
   

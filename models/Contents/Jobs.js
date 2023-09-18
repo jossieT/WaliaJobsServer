@@ -53,13 +53,16 @@ const jobSchema = new Schema({
         type: [String]
     },
     responsiblities: {
-        type: [String]
+        type: [String],
+        default: []
     },
     requirements: {
-        type: [String]
+        type: [String],
+        default: []
     },
     preferredSkills: {
-        type: [String]
+        type: [String],
+        default: []
     },
     jobPostDate: {
         type: Date,
