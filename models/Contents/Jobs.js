@@ -69,7 +69,7 @@ const jobSchema = new Schema({
         default: Date.now
     },
     closingDate: {
-        type: String,
+        type: Date,
         required: true
     },
     applicationFormLink: {
