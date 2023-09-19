@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const jobs = require('./Jobs');
 const Schema = mongoose.Schema;
 
 const companySchema = new Schema({
@@ -35,6 +36,12 @@ const companySchema = new Schema({
         type: String,
         required: true
     },
+    jobs: [
+        {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Jobs"
+    }
+    ]
 },
 { timestamps: true });
 

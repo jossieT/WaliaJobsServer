@@ -91,7 +91,8 @@ const jobSchema = new Schema({
         required: true
     },
     img: {
-        type: String
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Companies"
     },
 },
 { timestamps: true });

@@ -5,6 +5,7 @@ const { response } = require("express");
 const fs = require('fs');
 const { uploadImage, imageUrl } = require("../uploadController");
 const { deleteImage } = require("../../service/deleteService");
+const Company = require("../../models/Contents/Companies");
 
 //@desc  Create Job
 //@route POST /api/v1/Jobs
@@ -45,10 +46,13 @@ exports.createJob = AysncHandler(async (req, res) => {
   const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
   const formattedDate = date.toLocaleString('en-US', options);
   //checking if job exists
+
   const jobFound = await Job.findOne({ title });
   if (jobFound) {
     throw new Error("Job  already exists");
   }
+
+  
   //create the job
   const jobCreated = await Job.create({
      title, 
@@ -76,7 +80,15 @@ exports.createJob = AysncHandler(async (req, res) => {
      jobPostDate: formattedDate,
      img: uploadedImageUrl
   });
-  
+    //find company using company name and assign object Id of this job
+    console.log("I am here");
+    const company = await Company.findOne({name: jobCreated.companyName});
+    console.log(company.name);
+    if(company){
+     company.jobs.push(jobCreated._id);
+    }
+    company.save();
+
     res.status(201).json({
     status: "success",
     message: "Job created successfully",

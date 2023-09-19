@@ -1,5 +1,5 @@
 const AysncHandler = require("express-async-handler");
-//const Job = require("../../models/Contents/Jobs");
+const Job = require("../../models/Contents/Jobs");
 const Company = require("../../models/Contents/Companies");
 const { response } = require("express");
 //const Admin = require("../../model/Staff/Admin");
@@ -52,6 +52,7 @@ exports.addNewCompany= AysncHandler(async (req, res) => {
     status: "success",
     message: "Company added successfully",
     data: companyCreated
+
   })
 });
 
@@ -69,6 +70,7 @@ exports.getAllCompanies = AysncHandler(async (req, res) => {
     status: "success",
     message: "Companies fetched successfully",
     data: companies
+
   });
 });
  
@@ -78,13 +80,16 @@ exports.getAllCompanies = AysncHandler(async (req, res) => {
 
 exports.getSingleCompany = AysncHandler(async (req, res) => {
   const company = await Company.findById(req.params.id);
+  //.populate("jobs");
   if(!company){
     throw new Error("Company not found!");
   }
+
   res.status(201).json({
     status: "success",
     message: "Company fetched successfully",
     data: company
+
   });
 });
 
@@ -138,6 +143,7 @@ exports.updateCompany = AysncHandler(async (req, res) => {
     status: "success",
     message: "Company updated successfully",
     data: updatedCompany
+
   });
 });
 
@@ -153,10 +159,11 @@ exports.deleteCompany= AysncHandler(async (req, res) => {
   if(company.companyLogo){
     deleteImage(companyLogo);
   }
+
   await job.deleteOne();
   res.status(201).json({
     status: "success",
-    message: "Company deleted successfully",
+    message: "Company deleted successfully"
   });
 });
 
