@@ -79,8 +79,8 @@ exports.getAllCompanies = AysncHandler(async (req, res) => {
 //@acess  Public
 
 exports.getSingleCompany = AysncHandler(async (req, res) => {
-  const company = await Company.findById(req.params.id);
-  //.populate("jobs");
+  const company = await Company.findById(req.params.id)
+  .populate("jobs");
   if(!company){
     throw new Error("Company not found!");
   }
