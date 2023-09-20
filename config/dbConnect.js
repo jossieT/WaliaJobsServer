@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const dbConnect = async () =>{
 
         try{
-            mongoose.connect(process.env.MONGO_LOCAL_URL);
+            mongoose.connect(process.env.MONGO_REMOTE_URL);
             console.log("Walia db connection successful");
         }
         catch(error){
