@@ -37,11 +37,6 @@ exports.createJob = AysncHandler(async (req, res) => {
      postedBy
     } = req.body;
 
-    let uploadedImageUrl;
-    if (req.file) {
-      uploadedImageUrl = await req.imageData.secure_url;
-  }
-
   const date = new Date();
   const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
   const formattedDate = date.toLocaleString('en-US', options);
@@ -51,7 +46,16 @@ exports.createJob = AysncHandler(async (req, res) => {
   if (jobFound) {
     throw new Error("Job  already exists");
   }
-
+  let imageUrl;
+  const imgCompany = await Company.findOne({name: companyName});
+    console.log(imgCompany.name);
+    if(imgCompany){
+     imageUrl = imgCompany.companyLogo;
+    }else{
+      if (req.file) {
+        imageUrl = await req.imageData.secure_url;
+    }
+    }
   
   //create the job
   const jobCreated = await Job.create({
@@ -78,10 +82,11 @@ exports.createJob = AysncHandler(async (req, res) => {
      applicants,
      postedBy,
      jobPostDate: formattedDate,
-     img: uploadedImageUrl
+     img: imageUrl
+
   });
     //find company using company name and assign object Id of this job
-    console.log("I am here");
+    //console.log("I am here");
     const company = await Company.findOne({name: jobCreated.companyName});
     console.log(company.name);
     if(company){

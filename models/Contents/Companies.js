@@ -40,7 +40,7 @@ const companySchema = new Schema({
         {
         type: mongoose.Schema.Types.ObjectId,
         ref: jobs
-    }
+        }
     ]
 },
 { timestamps: true });
