@@ -233,9 +233,10 @@ exports.deleteAllJobs = AysncHandler(async (req, res) => {
 //@route GET /api/v1/Jobs/:key
 //@acess  Public
 exports.searchJob = AysncHandler(async (req, res) => {
+
   let filteredJobs = await Job.find({
      "$or":[
-        {title: {$regex: req.params.key}}
+        {title: {$regex: req.params.key.toLowerCase()}}
      ]
   });
   if(filteredJobs.length == 0){
