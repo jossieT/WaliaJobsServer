@@ -2,6 +2,58 @@ const mongoose = require('mongoose');
 const jobs = require('./Jobs');
 const Schema = mongoose.Schema;
 
+const benefitsSchema = new Schema({
+    InternationalRelocation: {
+      type: Boolean,
+      default: false
+    },
+    FreeTransport: {
+      type: Boolean,
+      default: false
+    },
+    ChildCare: {
+      type: Boolean,
+      default: false
+    },
+    Gymnasium: {
+      type: Boolean,
+      default: false
+    },
+    Cafeteria: {
+      type: Boolean,
+      default: false
+    },
+    WorkFromHome: {
+      type: Boolean,
+      default: false
+    },
+    FreeFood: {
+      type: Boolean,
+      default: false
+    },
+    TeamOutings: {
+      type: Boolean,
+      default: false
+    },
+    EducationAssistance: {
+      type: Boolean,
+      default: false
+    },
+    SoftSkillTraining: {
+      type: Boolean,
+      default: false
+    },
+    HealthInsurance: {
+      type: Boolean,
+      default: false
+    },
+    JobTraining: {
+      type: Boolean,
+      default: false
+    }
+  });
+
+  
 const companySchema = new Schema({
     name: {
         type: String,
@@ -21,8 +73,7 @@ const companySchema = new Schema({
         type: String,
     },
     companyLogo: {
-        type: String,
-        required: true
+        type: String
     },
     employeeNumber: {
         type: String,
@@ -36,6 +87,10 @@ const companySchema = new Schema({
         type: String,
         required: true
     },
+    benefits: {        
+        type: benefitsSchema,
+        default: {}
+    },
     jobs: [
         {
         type: mongoose.Schema.Types.ObjectId,
@@ -45,5 +100,6 @@ const companySchema = new Schema({
 },
 { timestamps: true });
 
+const Benefits = mongoose.model("Benefits", benefitsSchema);
 const Company = mongoose.model("Company", companySchema);
-module.exports = Company;
+module.exports = { Company, Benefits };

@@ -1,6 +1,6 @@
 const AysncHandler = require("express-async-handler");
 const Job = require("../../models/Contents/Jobs");
-const Company = require("../../models/Contents/Companies");
+const { Company, Benefits } = require("../../models/Contents/Companies");
 const { response } = require("express");
 //const Admin = require("../../model/Staff/Admin");
 //const fs = require('fs');
@@ -22,7 +22,19 @@ exports.addNewCompany= AysncHandler(async (req, res) => {
      employeeNumber,
      mainService,
      about,
-     postedBy
+     postedBy,
+     InternationalRelocation,
+     FreeTransport,
+     ChildCare,
+     Gymnasium,
+     Cafeteria,
+     WorkFromHome,
+     FreeFood,
+     TeamOutings,
+     EducationAssistance,
+     SoftSkillTraining,
+     HealthInsurance,
+     JobTraining
     } = req.body;
 
     let uploadedImageUrl;
@@ -45,7 +57,21 @@ exports.addNewCompany= AysncHandler(async (req, res) => {
     employeeNumber,
     mainService,
     about,
-    postedBy
+    postedBy,
+    benefits: {
+    InternationalRelocation,
+     FreeTransport,
+     ChildCare,
+     Gymnasium,
+     Cafeteria,
+     WorkFromHome,
+     FreeFood,
+     TeamOutings,
+     EducationAssistance,
+     SoftSkillTraining,
+     HealthInsurance,
+     JobTraining
+    }
   });
   
     res.status(201).json({
@@ -65,7 +91,7 @@ exports.getAllCompanies = AysncHandler(async (req, res) => {
   if(!companies){
     throw new Error("No company result found");
   }
-
+  
   res.status(201).json({
     status: "success",
     message: "Companies fetched successfully",
@@ -84,7 +110,7 @@ exports.getSingleCompany = AysncHandler(async (req, res) => {
   if(!company){
     throw new Error("Company not found!");
   }
-
+  
   res.status(201).json({
     status: "success",
     message: "Company fetched successfully",
@@ -98,53 +124,79 @@ exports.getSingleCompany = AysncHandler(async (req, res) => {
 //@acess  Private
 
 exports.updateCompany = AysncHandler(async (req, res) => {
-    const {
-        name, 
-        rating,
-        reviews,
-        companyType,
-        headOffice,
-        companyLogo,
-        employeeNumber,
-        mainService,
-        about,
-        postedBy
-       } = req.body;
+  const {
+      name, 
+      rating,
+      reviews,
+      companyType,
+      headOffice,
+      companyLogo,
+      employeeNumber,
+      mainService,
+      about,
+      postedBy,
+      InternationalRelocation,
+      FreeTransport,
+      ChildCare,
+      Gymnasium,
+      Cafeteria,
+      WorkFromHome,
+      FreeFood,
+      TeamOutings,
+      EducationAssistance,
+      SoftSkillTraining,
+      HealthInsurance,
+      JobTraining
+     } = req.body;
 
-       let uploadedImageUrl;
-       if (req.file) {
-        let company = await Company.findById(req.params.id);
-        let oldImageUrl = company.companyLogo;
-        if(oldImageUrl){
-          deleteImage(companyLogo);
-        }
-        uploadedImageUrl = await req.imageData.secure_url;
-       }
+     let uploadedImageUrl;
+     if (req.file) {
+      let company = await Company.findById(req.params.id);
+      let oldImageUrl = company.companyLogo;
+      if(oldImageUrl){
+        deleteImage(companyLogo);
+      }
+      uploadedImageUrl = await req.imageData.secure_url;
+     }
 
-  const updatedCompany = await Company.findByIdAndUpdate(req.params.id,
-    {
-        name, 
-        rating,
-        reviews,
-        companyType,
-        headOffice,
-        companyLogo: uploadedImageUrl,
-        employeeNumber,
-        mainService,
-        about,
-        postedBy
-    },
-    {
-      new: true,
-    }
-  );
+const updatedCompany = await Company.findByIdAndUpdate(req.params.id,
+  {
+      name, 
+      rating,
+      reviews,
+      companyType,
+      headOffice,
+      companyLogo: uploadedImageUrl,
+      employeeNumber,
+      mainService,
+      about,
+      postedBy,
+      benefits: {
+          InternationalRelocation,
+          FreeTransport,
+          ChildCare,
+          Gymnasium,
+          Cafeteria,
+          WorkFromHome,
+          FreeFood,
+          TeamOutings,
+          EducationAssistance,
+          SoftSkillTraining,
+          HealthInsurance,
+          JobTraining
+      }
+  },
+  {
+    new: true,
+  }
+);
 
-  res.status(201).json({
-    status: "success",
-    message: "Company updated successfully",
-    data: updatedCompany
+res.status(201).json({
+  status: "success",
+  message: "Company updated successfully",
+  data: updatedCompany
 
-  });
+});
 });
 
 //@desc  Delete single Company
@@ -159,8 +211,8 @@ exports.deleteCompany= AysncHandler(async (req, res) => {
   if(company.companyLogo){
     deleteImage(companyLogo);
   }
-
-  await job.deleteOne();
+  console.log("working")
+  await Company.deleteOne();
   res.status(201).json({
     status: "success",
     message: "Company deleted successfully"
@@ -184,9 +236,10 @@ exports.deleteAllCopanies = AysncHandler(async (req, res) => {
 //@route GET /api/v1/compaines/:key
 //@acess  Public
 exports.searchCompany = AysncHandler(async (req, res) => {
+  let key = req.params.key;
   let filteredCompanies = await Company.find({
      "$or":[
-        {name: {$regex: req.params.key}}
+        {name: {$regex: new RegExp(key, 'i')}}
      ]
   });
   if(filteredCompanies.length == 0){

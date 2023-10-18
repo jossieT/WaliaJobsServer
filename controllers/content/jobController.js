@@ -188,7 +188,7 @@ exports.updateJob = AysncHandler(async (req, res) => {
       new: true,
     }
   );
-
+  console.log(updatedJob);
   res.status(201).json({
     status: "success",
     message: "Job updated successfully",
@@ -203,7 +203,7 @@ exports.updateJob = AysncHandler(async (req, res) => {
 exports.deleteJob = AysncHandler(async (req, res) => {
   const job = await Job.findById(req.params.id);
   if(!job){
-    throw new Error("No user found!");
+    throw new Error("No Job found!");
   }
   if(job.img){
     deleteImage(job.img);

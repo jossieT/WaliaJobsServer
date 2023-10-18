@@ -2,6 +2,7 @@
 .env
 #node modules
 node_modules
+data
 # Logs
 logs
 *.log
