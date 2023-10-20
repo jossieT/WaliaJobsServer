@@ -7,7 +7,7 @@ const { response } = require("express");
 const { uploadImage, imageUrl } = require("../uploadController");
 const { deleteImage } = require("../../service/deleteService");
 
-//@desc  A dd new Company
+//@desc  Add new Company
 //@route POST /api/v1/companies
 //@acess  Private
 
@@ -106,7 +106,9 @@ exports.getAllCompanies = AysncHandler(async (req, res) => {
 
 exports.getSingleCompany = AysncHandler(async (req, res) => {
   const company = await Company.findById(req.params.id)
-  .populate("jobs");
+  .populate('jobs')
+  .populate('reviews');
+
   if(!company){
     throw new Error("Company not found!");
   }

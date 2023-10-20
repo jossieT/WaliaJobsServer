@@ -1,86 +1,53 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Define the schema for the benefits
-
-const benefitsSchema = new Schema({
-  "International Relocation": {
-    type: Boolean,
-    default: false
+// Define the schema for the rating
+const companyRatingSchema = new Schema({
+  overallRating: {
+    type: Number,
+    min: 1,
+    max: 5
   },
-  "Free Transport": {
-    type: Boolean,
-    default: false
+  workLifeBalance: {
+    type: Number,
+    min: 1,
+    max: 5
   },
-  "Child Care": {
-    type: Boolean,
-    default: false
+  salaryAndBenefits: {
+    type: Number,
+    min: 1,
+    max: 5
   },
-  "Gymnasium": {
-    type: Boolean,
-    default: false
+  promotionAndAppraisal: {
+    type: Number,
+    min: 1,
+    max: 5
   },
-  "Cafeteria": {
-    type: Boolean,
-    default: false
+  jobSecurity: {
+    type: Number,
+    min: 1,
+    max: 5
   },
-  "Work From Home": {
-    type: Boolean,
-    default: false
+  skillDevelopmentANdLearning: {
+    type: Number,
+    min: 1,
+    max: 5
   },
-  "Free Food": {
-    type: Boolean,
-    default: false
+  workSatisfaction: {
+    type: Number,
+    min: 1,
+    max: 5
   },
-  "Team Outings": {
-    type: Boolean,
-    default: false
+  companyCulture: {
+    type: Number,
+    min: 1,
+    max: 5
   },
-  "Education Assistance": {
-    type: Boolean,
-    default: false
-  },
-  "Soft Skill Training": {
-    type: Boolean,
-    default: false
-  },
-  "Health Insurance": {
-    type: Boolean,
-    default: false
-  },
-  "Job Training": {
-    type: Boolean,
-    default: false
-  }
 });
 
 // Schema for the review
 const reviewSchema = new Schema({
   
-  companyId: {
-    type: Number,
-    required: true
-  },
-  name: {
-    type: String,
-    required: true
-  },
-  img: {
-    type: String,
-    required: true
-  },
-  rate: {
-    type: Number,
-    required: true
-  },
-  reviewLike: {
-    type: String,
-    required: true
-  },
-  reviewDislike: {
-    type: String,
-    required: true
-  },
   companyName: {
     type: String,
     required: true
@@ -89,12 +56,46 @@ const reviewSchema = new Schema({
     type: String,
     required: true
   },
-  date: {
+  iWorkHere: {
+    type: String,
+    enum: ['Yes', 'No'],
+    required: true
+  },
+  reviewLikes: {
     type: String,
     required: true
   },
-  benefits: {
-    type: benefitsSchema,
+  reviewDislikes: {
+    type: String,
+    required: true
+  },
+  gender: {
+    type: String,
+    enum: ['Male', 'Female'],
+    required: true
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+    required: true
+  },
+  workPolicy: {
+    type: String,
+    enum: ['workFromHome', 'workFromOffice', 'hybrid', 'unclear'],
+    required: true
+  },
+  employmentType: {
+    type: String,
+    enum: ['fullTime', 'partTime', 'contractual', 'inter', 'freelancer'],
+    required: true
+  },
+  department: {
+    type: String,
+    enum: ['computer science', 'management', 'accounting', 'software development', 'banking operation'],
+    required: true
+  },
+  companyRating: {
+    type: companyRatingSchema,
     required: true
   }
 },{ timestamps: true });

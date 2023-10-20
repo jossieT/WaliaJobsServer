@@ -86,7 +86,6 @@ exports.createJob = AysncHandler(async (req, res) => {
 
   });
     //find company using company name and assign object Id of this job
-    //console.log("I am here");
     const company = await Company.findOne({name: jobCreated.companyName});
     console.log(company.name);
     if(company){

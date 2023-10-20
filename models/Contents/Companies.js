@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const jobs = require('./Jobs');
+const reviews = require('./Reviews');
 const Schema = mongoose.Schema;
 
 const benefitsSchema = new Schema({
@@ -96,7 +97,14 @@ const companySchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: jobs
         }
-    ]
+    ],
+    userReview: [
+      {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: reviews,
+      default: []
+      }
+  ]
 },
 { timestamps: true });
 

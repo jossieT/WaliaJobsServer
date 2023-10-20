@@ -8,7 +8,8 @@ const imageUpload = require('../middlewares/imageUpload');
 const bodyParser = require('body-parser');
 const companyRouter = require('../routes/content/companyRouter');
 const blogRouter = require('../routes/content/blogRouter');
-blogRouter
+const reviewRouter = require('../routes/content/reviewRouter');
+
 //const uploadRouter = require('../routes/upload.route');
 const app = express();
 
@@ -35,6 +36,7 @@ app.use((req, res, next)=>{
 app.use("/api/v1/job", jobRouter);
 app.use("/api/v1/companies", companyRouter);
 app.use("/api/v1/blogs", blogRouter);
+app.use("/api/v1/reviews", reviewRouter);
 
 //app.use('/upload', uploadRouter)
 
