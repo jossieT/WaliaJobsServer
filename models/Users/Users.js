@@ -76,7 +76,12 @@ const userSchema = new Schema({
         type: String,
         enum: ['Admin', 'Moderator', 'User'],
         default: 'User'
-      }
+      },
+      favouriteJobs: [
+        {
+          
+        }
+      ]
     },{ timestamps: true });
     
     const User = mongoose.model('User', userSchema);

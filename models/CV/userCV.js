@@ -1,5 +1,17 @@
 const mongoose = require('mongoose');
+const Achievements = require('./AdditionalSection/Achievement');
+const Certification = require('./AdditionalSection/Certification');
+const Interest = require('./AdditionalSection/Interest');
+const Language = require('./AdditionalSection/Languages');
+const Reference = require('./AdditionalSection/Reference');
+const Education = require('./Education');
+const Experience = require('./Experience');
+const Heading = require('./Heading');
+const Skills = require('./Skills');
+const Summary = require('./Summary');
 const Schema = mongoose.Schema;
+
+
 
 const userCvSchema = new Schema({
   user: {
@@ -7,32 +19,47 @@ const userCvSchema = new Schema({
     ref: 'User',
     required: true
   },
-  degree: {
-    type: String,
-    required: true
+  achievements: {
+    type: Achievements,
+    default: {}
   },
-  jobPosition: {
-    type: String,
-    required: true
+  certification: {
+    type: Certification,
+    default: {}
   },
-  institution: {
-    type: String,
-    required: true
+  interest: {
+    type: Interest,
+    default: {}
   },
-  fieldOfStudy: {
-    type: String,
-    required: true
+  language: {
+    type: Language,
+    default: {}
   },
-  startDate: {
-    type: Date,
-    required: true
+  reference: {
+    type: Reference,
+    default: {}
   },
-  endDate: {
-    type: Date
+  education: {
+    type: Education,
+    default: {}
   },
-  description: {
-    type: String
-  }
+  experience: {
+    type: Experience,
+    default: {}
+  },
+  heading: {
+    type: Heading,
+    default: {}
+  },
+  skills: {
+    type: Skills,
+    default: {}
+  },
+  summary: {
+    type: Summary,
+    default: {}
+  },
+  
 });
 
 const UserCV = mongoose.model('UserCV', userCvSchema);
