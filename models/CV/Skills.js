@@ -8,4 +8,4 @@ const skillSchema = new mongoose.Schema({
 })
 
 const Skills = mongoose.model("Skills", skillSchema);
-module.exports = Skills;
+module.exports = { Skills, skillSchema };

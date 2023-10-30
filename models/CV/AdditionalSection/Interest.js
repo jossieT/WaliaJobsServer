@@ -8,4 +8,4 @@ const interestSchema = new mongoose.Schema({
 })
 
 const Interest = mongoose.model("Interest", interestSchema);
-module.exports = Interest;
+module.exports = {Interest, interestSchema };

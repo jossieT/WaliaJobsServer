@@ -5,7 +5,7 @@ const referenceSchema = new mongoose.Schema({
     fullName: {
         type: String
     },
-    jobTitle: {
+    refJobTitle: {
         type: String
     },
     companyName: {
@@ -20,4 +20,4 @@ const referenceSchema = new mongoose.Schema({
 })
 
 const Reference = mongoose.model("Reference", referenceSchema);
-module.exports = Reference;
+module.exports = { Reference, referenceSchema};

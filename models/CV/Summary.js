@@ -8,4 +8,4 @@ const summarySchema = new mongoose.Schema({
 })
 
 const Summary = mongoose.model("Summary", summarySchema);
-module.exports = Summary;
+module.exports = { Summary, summarySchema};

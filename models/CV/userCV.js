@@ -1,62 +1,61 @@
 const mongoose = require('mongoose');
-const Achievements = require('./AdditionalSection/Achievement');
-const Certification = require('./AdditionalSection/Certification');
-const Interest = require('./AdditionalSection/Interest');
-const Language = require('./AdditionalSection/Languages');
-const Reference = require('./AdditionalSection/Reference');
-const Education = require('./Education');
-const Experience = require('./Experience');
-const Heading = require('./Heading');
-const Skills = require('./Skills');
-const Summary = require('./Summary');
+const { Achievements, achievementsSchema} = require('./AdditionalSection/Achievement');
+const { Certification, certificationSchema} = require('./AdditionalSection/Certification');
+const { Interest, interestSchema } = require('./AdditionalSection/Interest');
+const { Language, languageSchema} = require('./AdditionalSection/Languages');
+const { Reference, referenceSchema } = require('./AdditionalSection/Reference');
+const { Education,educationSchema } = require('./Education');
+const { Experience, experienceSchema } = require('./Experience');
+const { Heading, headingSchema } = require('./Heading');
+const { Skills, skillSchema } = require('./Skills');
+const { Summary, summarySchema } = require('./Summary');
 const Schema = mongoose.Schema;
 
 
 
 const userCvSchema = new Schema({
   user: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
+    type: String,
+    default: "user"
   },
   achievements: {
-    type: Achievements,
+    type: achievementsSchema,
     default: {}
   },
   certification: {
-    type: Certification,
+    type: certificationSchema,
     default: {}
   },
   interest: {
-    type: Interest,
+    type: interestSchema,
     default: {}
   },
   language: {
-    type: Language,
+    type: languageSchema,
     default: {}
   },
   reference: {
-    type: Reference,
+    type: referenceSchema,
     default: {}
   },
   education: {
-    type: Education,
+    type: educationSchema,
     default: {}
   },
   experience: {
-    type: Experience,
+    type: experienceSchema,
     default: {}
   },
   heading: {
-    type: Heading,
+    type: headingSchema,
     default: {}
   },
   skills: {
-    type: Skills,
+    type: skillSchema,
     default: {}
   },
   summary: {
-    type: Summary,
+    type: summarySchema,
     default: {}
   },
   

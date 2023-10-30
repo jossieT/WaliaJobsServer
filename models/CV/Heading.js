@@ -2,25 +2,25 @@ const mongoose = require('mongoose');
 
 const headingSchema = new mongoose.Schema({
 
-    firstName: {
+    headerFirstName: {
         type: String
     },
-    lastName: {
+    headerLastName: {
         type: String
     },
-    position: {
+    HeaderPosition: {
         type: String
     },
-    city: {
+    HeaderCity: {
         type: String
     },
-    region: {
+    headerRegion: {
         type: String
     },
-    phone: {
+    headerPhone: {
         type: String
     },
-    email: {
+    headerEmail: {
         type: String
     },
     profilePic: {
@@ -29,4 +29,4 @@ const headingSchema = new mongoose.Schema({
 })
 
 const Heading = mongoose.model("Heading", headingSchema);
-module.exports = Heading;
+module.exports = { Heading, headingSchema };

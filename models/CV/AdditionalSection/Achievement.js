@@ -8,4 +8,4 @@ const achievementsSchema = new mongoose.Schema({
 })
 
 const Achievements = mongoose.model("Achievements", achievementsSchema);
-module.exports = Achievements;
+module.exports = { Achievements , achievementsSchema};

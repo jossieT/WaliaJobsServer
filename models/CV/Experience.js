@@ -2,19 +2,19 @@ const mongoose = require('mongoose');
 
 const experienceSchema = new mongoose.Schema({
 
-    jobTitle: {
+    expJobTitle: {
         type: String
     },
     employer: {
         type: String
     },
-    city: {
+    expCity: {
         type: String,
     },
-    startDate: {
+    exStartDate: {
         type: Date
     },
-    endDate: {
+    expEndDate: {
         type: Date
     },
     currentlyWorkHere: {
@@ -24,4 +24,4 @@ const experienceSchema = new mongoose.Schema({
 })
 
 const Experience = mongoose.model("Experience", experienceSchema);
-module.exports = Experience;
+module.exports = { Experience, experienceSchema };

@@ -5,7 +5,7 @@ const educationSchema = new mongoose.Schema({
     institution: {
         type: String
     },
-    city: {
+    eduCity: {
         type: String
     },
     qualification: {
@@ -21,4 +21,4 @@ const educationSchema = new mongoose.Schema({
 })
 
 const Education = mongoose.model("Education", educationSchema);
-module.exports = Education;
+module.exports = { Education, educationSchema };
