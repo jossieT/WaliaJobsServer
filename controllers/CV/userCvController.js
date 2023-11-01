@@ -102,3 +102,17 @@ exports.addNewCv = AysncHandler (async (req, res)=>{
     })
 })
 
+exports.getAllUserCv = AysncHandler (async (req, res)=>{
+
+    const allCv = await UserCV.find({});
+    if(! allCv){
+        throw new Error("No Cv found");
+    }
+
+    res.status(201).json({
+        status: "success",
+        meassage: "All CV fetched successfully",
+        data: allCv
+    })
+})
+
