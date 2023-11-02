@@ -28,14 +28,14 @@ exports.addNewCv = AysncHandler (async (req, res)=>{
         currentlyWorkHere,
         headerFirstName,
         headerLastName,
-        HeaderPosition,
-        HeaderCity,
+        headerPosition,
+        headerCity,
         headerRegion,
         headerPhone,
         headerEmail,
         profilePic,
         skills,
-        Summary,
+        summary,
 
     } = req.body
 
@@ -80,8 +80,8 @@ exports.addNewCv = AysncHandler (async (req, res)=>{
         heading: {
             headerFirstName,
             headerLastName,
-            HeaderPosition,
-            HeaderCity,
+            headerPosition,
+            headerCity,
             headerRegion,
             headerPhone,
             headerEmail,
@@ -91,7 +91,7 @@ exports.addNewCv = AysncHandler (async (req, res)=>{
             skills
         },
         summary: {
-            Summary
+            summary
         }
     })
 
@@ -105,7 +105,7 @@ exports.addNewCv = AysncHandler (async (req, res)=>{
 exports.getAllUserCv = AysncHandler (async (req, res)=>{
 
     const allCv = await UserCV.find({});
-    if(! allCv){
+    if(allCv.length === 0){
         throw new Error("No Cv found");
     }
 
