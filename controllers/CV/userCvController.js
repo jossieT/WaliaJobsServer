@@ -37,7 +37,7 @@ exports.addNewCv = AysncHandler (async (req, res)=>{
         skills,
         summary,
 
-    } = req.body
+    } = req.body;
 
     const createdUserCv = await UserCV.create({
         achievements: {
@@ -116,3 +116,101 @@ exports.getAllUserCv = AysncHandler (async (req, res)=>{
     })
 })
 
+exports.updateUserCv = AysncHandler(async (req, res)=>{
+    const {
+        achievements,
+        certificationName,
+        issuedBy,
+        issuedDate,
+        interest,
+        languageName,
+        proficiencyLevel,
+        fullName,
+        refJobTitle,
+        companyName,
+        email,
+        phone,
+        institution,
+        eduCity,
+        fieldOfStudy,
+        yearOfGraduation,
+        expJobTitle,
+        employer,
+        expCity,
+        exStartDate,
+        expEndDate,
+        currentlyWorkHere,
+        headerFirstName,
+        headerLastName,
+        headerPosition,
+        headerCity,
+        headerRegion,
+        headerPhone,
+        headerEmail,
+        profilePic,
+        skills,
+        summary,
+
+    } = req.body
+
+    const updatedUserCv = await UserCV.findByIdAndUpdate(req.params.id, {
+        achievements: {
+            achievements
+        },
+        certification: {
+            certificationName,
+            issuedBy,
+            issuedDate,
+        },
+        interest: {
+            interest
+        },
+        language: {
+            languageName,
+            proficiencyLevel,
+        },
+        reference: {
+            fullName,
+            refJobTitle,
+            companyName,
+            email,
+            phone,
+        },
+        education: {
+            institution,
+            eduCity,
+            qualification: "Diploma",
+            fieldOfStudy,
+            yearOfGraduation
+        },
+        experience: {
+            expJobTitle,
+            employer,
+            expCity,
+            exStartDate,
+            expEndDate,
+            currentlyWorkHere
+        },
+        heading: {
+            headerFirstName,
+            headerLastName,
+            headerPosition,
+            headerCity,
+            headerRegion,
+            headerPhone,
+            headerEmail,
+            profilePic
+        },
+        skills: {
+            skills
+        },
+        summary: {
+            summary
+        }
+    })
+    res.status(201).json({
+        status: "success",
+        meassage: "CV Updted successfully",
+        data: updatedUserCv
+    })
+})
