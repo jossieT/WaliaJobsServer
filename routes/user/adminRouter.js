@@ -2,9 +2,8 @@ const { registerAdmnCtrl, adminLgnCtrl } = require('../../controllers/user/admin
 const express = require('express');
 const adminRouter = express.Router();
 
-adminRouter
-.route("/")
-.post(registerAdmnCtrl)
-.post(adminLgnCtrl)
+adminRouter.post('/register', registerAdmnCtrl);
+
+adminRouter.post('/login', adminLgnCtrl);
 
 module.exports = adminRouter;
