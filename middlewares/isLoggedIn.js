@@ -1,5 +1,6 @@
-const Admin = require("../model/Staff/Admin");
+const Admin = require("../models/Users/Admins");
 const verifyToken = require("../utils/verifyToken");
+//const verifyToken = require("../utils/verifyToken");
 
 const isLoggedIn = async (req, res, next)=>{
     //get the token from header
