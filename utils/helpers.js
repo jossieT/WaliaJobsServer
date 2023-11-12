@@ -12,4 +12,4 @@ const passwordMatcher = async function(enteredPass, userPass){
     return isMatched;
 }
 
-module.exports = {passwordHasher, passwordMatcher};
+module.exports = { passwordHasher, passwordMatcher };
