@@ -22,30 +22,30 @@ const userCvSchema = new Schema({
     type: achievementsSchema,
     default: {}
   },
-  certification: {
+  certification: [{
     type: certificationSchema,
     default: {}
-  },
+  }],
   interest: {
     type: interestSchema,
     default: {}
   },
-  language: {
+  language: [{
     type: languageSchema,
     default: {}
-  },
-  reference: {
+  }],
+  reference: [{
     type: referenceSchema,
     default: {}
-  },
-  education: {
+  }],
+  education: [{
     type: educationSchema,
     default: {}
-  },
-  experience: {
+  }],
+  experience: [{
     type: experienceSchema,
     default: {}
-  },
+  }],
   heading: {
     type: headingSchema,
     default: {}

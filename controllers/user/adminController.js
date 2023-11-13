@@ -1,5 +1,4 @@
 const AsyncHandler = require('express-async-handler');
-const { use } = require('../../app/app');
 const Admin = require('../../models/Users/Admins');
 const generateToken = require('../../utils/tokenGenerator');
 const bcrypt = require('bcryptjs');

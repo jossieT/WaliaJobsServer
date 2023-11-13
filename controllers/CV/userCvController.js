@@ -43,40 +43,40 @@ exports.addNewCv = AysncHandler (async (req, res)=>{
         achievements: {
             achievements
         },
-        certification: {
+        certification: [{
             certificationName,
             issuedBy,
             issuedDate,
-        },
+        }],
         interest: {
             interest
         },
-        language: {
+        language: [{
             languageName,
             proficiencyLevel,
-        },
-        reference: {
+        }],
+        reference: [{
             fullName,
             refJobTitle,
             companyName,
             email,
             phone,
-        },
-        education: {
+        }],
+        education: [{
             institution,
             eduCity,
             qualification: "Diploma",
             fieldOfStudy,
             yearOfGraduation
-        },
-        experience: {
+        }],
+        experience: [{
             expJobTitle,
             employer,
             expCity,
             exStartDate,
             expEndDate,
             currentlyWorkHere
-        },
+        }],
         heading: {
             headerFirstName,
             headerLastName,
