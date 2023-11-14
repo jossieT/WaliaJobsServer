@@ -11,17 +11,11 @@ const isLoggedIn = async (req, res, next)=>{
     console.log(token);
     //verify token
     const verify = await verifyToken(token);
-    let user;
+    //console.log(verify);
+    //let user;
     if(verify){
         //find the user
-        if(verify.role === "Admin"){
-            user = await Admin.findById(verify.id);
-        }else if(verify.role === "User"){
-            user = await User.findById(verify.id);
-        } else {
-            throw new Error("Invalid User Role");
-        }
-
+        const user = await User.findById(verify.id);
         //save the user in to req.obj
         req.userAuth = user;
         next();

@@ -11,6 +11,7 @@ const blogRouter = require('../routes/content/blogRouter');
 const reviewRouter = require('../routes/content/reviewRouter');
 const cvRouter = require('../routes/cv/userCvRouter');
 const adminRouter = require('../routes/user/adminRouter');
+const userRouter = require('../routes/user/userRouter');
 
 
 //const uploadRouter = require('../routes/upload.route');
@@ -41,7 +42,8 @@ app.use("/api/v1/companies", companyRouter);
 app.use("/api/v1/blogs", blogRouter);
 app.use("/api/v1/reviews", reviewRouter);
 app.use("/api/v1/cv", cvRouter);
-app.use("/api/v1/admin", adminRouter)
+app.use("/api/v1/admin", adminRouter);
+app.use("/api/v1/user", userRouter);
 //app.use('/upload', uploadRouter)
 
 

@@ -44,7 +44,8 @@ const userSchema = new Schema({
         default: Date.now
       },
       lastLogin: {
-        type: Date
+        type: Date,
+        default: Date.now
       },
       preferences: {
         language: {

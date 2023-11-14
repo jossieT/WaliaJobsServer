@@ -19,19 +19,15 @@ exports.registerUser = AsyncHandler (async (req, res)=>{
         gender,
         phoneNumber,
         address,
-        accountStatus,
-        registrationDate,
-        lastLogin,
         language,
-        notification,
         facebook,
         twitter,
         instagram,
     } = req.body;
     
-    const foundUser =await User.find({ email });
+    const foundUser = await User.findOne({ email });
     if(foundUser){
-        throw new Error("User exist with provided email")
+        throw new Error("User exist with provided email");
     }
 
     //checking if image is requested
@@ -44,21 +40,19 @@ exports.registerUser = AsyncHandler (async (req, res)=>{
     // Register user
     const user = await User.create({
         email,
-        password,
+        password: hashedPassword,
         fullName,
         dateOfBirth,
         gender,
         phoneNumber,
         address,
         profilePicture: uploadedImageUrl,
-        accountStatus,
-        registrationDate,
-        lastLogin,
         language,
-        notification,
-        facebook,
-        twitter,
-        instagram,
+        socialMediaProfiles: {
+            facebook,
+            twitter,
+            instagram
+        }  
     })
     res.status(201).json({
         status: "success",
