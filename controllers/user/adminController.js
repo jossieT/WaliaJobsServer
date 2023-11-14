@@ -55,7 +55,7 @@ exports.adminLgnCtrl = AsyncHandler (async (req, res)=>{
         })
     } else{
         //save user to req object
-        //req.userAuth = user;
+        req.userAuth = user;
         const token = generateToken(user._id);
         const verify = verifyToken(token);
         return res.json({ 

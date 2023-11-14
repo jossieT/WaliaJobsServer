@@ -5,11 +5,12 @@ const verifyToken = require('../../utils/verifyToken');
 const { passwordHasher, passwordMatcher } = require('../../utils/helpers');
 const { uploadImage, imageUrl } = require("../uploadController");
 const { deleteImage } = require("../../service/deleteService");
+
 //@desc register user
 //@route POST /api/v1/user/register
 //@access public
 
-exports.registerUserCtrl = AsyncHandler (async (req, res)=>{
+exports.registerUser = AsyncHandler (async (req, res)=>{
     const {
         email,
         password,
@@ -18,7 +19,6 @@ exports.registerUserCtrl = AsyncHandler (async (req, res)=>{
         gender,
         phoneNumber,
         address,
-        profilePicture,
         accountStatus,
         registrationDate,
         lastLogin,
@@ -29,7 +29,7 @@ exports.registerUserCtrl = AsyncHandler (async (req, res)=>{
         instagram,
     } = req.body;
     
-    const foundUser = User.find({ email });
+    const foundUser =await User.find({ email });
     if(foundUser){
         throw new Error("User exist with provided email")
     }
@@ -60,4 +60,55 @@ exports.registerUserCtrl = AsyncHandler (async (req, res)=>{
         twitter,
         instagram,
     })
+    res.status(201).json({
+        status: "success",
+        message: "User registered successfully",
+        data: user
+    })
+});
+
+//@desc User Login
+//@route POST /api/v1/user/register
+//@access public
+
+exports.userLogin = AsyncHandler( async (req, res) => {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if(!user){
+        return res.json({
+              message: ' Invalid user credencials or user not found'
+          })
+      }
+
+      //verify password
+      const isMatched = await passwordMatcher(password, user.password);
+      if(!isMatched){
+          return res.json({
+              message: 'Invalid user credencials'
+          })
+      } else{
+          //save user to req object
+          //req.userAuth = user;
+          const token = generateToken(user._id);
+          const verify = verifyToken(token);
+          return res.json({ 
+              data: verify, token,
+              message: "User logged in successfully"
+      });
+    }
+})
+
+exports.getUserProfile = AsyncHandler( async (req, res)=>{
+
+    const user = await User.findById(req.userAuth._id).select("-password -createdAt -updatedAt");
+    if(!user){
+        throw new Error(" User not found");
+    }else{
+        res.status(200).json({
+            status: "success",
+            data: user,
+            message: "User profile fetched successfully"
+        })
+    }
 })
