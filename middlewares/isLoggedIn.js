@@ -1,4 +1,5 @@
 const Admin = require("../models/Users/Admins");
+const User = require("../models/Users/Users");
 const verifyToken = require("../utils/verifyToken");
 //const verifyToken = require("../utils/verifyToken");
 
@@ -10,10 +11,17 @@ const isLoggedIn = async (req, res, next)=>{
     console.log(token);
     //verify token
     const verify = await verifyToken(token);
+    let user;
     if(verify){
-        //find the admin
-        const user = await Admin.findById(verify.id);
-        //console.log(admin);
+        //find the user
+        if(verify.role === "Admin"){
+            user = await Admin.findById(verify.id);
+        }else if(verify.role === "User"){
+            user = await User.findById(verify.id);
+        } else {
+            throw new Error("Invalid User Role");
+        }
+
         //save the user in to req.obj
         req.userAuth = user;
         next();
