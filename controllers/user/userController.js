@@ -106,3 +106,4 @@ exports.getUserProfile = AsyncHandler( async (req, res)=>{
         })
     }
 })
+

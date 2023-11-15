@@ -4,6 +4,7 @@ const generateToken = require('../../utils/tokenGenerator');
 const bcrypt = require('bcryptjs');
 const verifyToken = require('../../utils/verifyToken');
 const { passwordHasher, passwordMatcher } = require('../../utils/helpers');
+const User = require('../../models/Users/Users');
 
 //@desc register admin
 //@route POST /api/v1/admins/register
@@ -96,3 +97,21 @@ exports.getAdminProfileCtrl = AsyncHandler (async (req, res)=>{
         })
     }
 });
+
+//@desc get All Users
+//@route GET /api/v1/admins/users
+//@access private
+
+exports.getAllUsers = AsyncHandler ( async (req, res)=>{
+    
+    const users = await User.find({});
+    if(!users){
+        throw new Error("No user record found");
+    }
+
+    res.status(201).json({
+        status: "Success",
+        message: "All user fetched successfully",
+        data: users
+    })
+})
