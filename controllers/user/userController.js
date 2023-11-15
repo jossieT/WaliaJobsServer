@@ -107,3 +107,6 @@ exports.getUserProfile = AsyncHandler( async (req, res)=>{
     }
 })
 
+exports.updateProfile = AsyncHandler( async (req, res)=>{
+
+})
