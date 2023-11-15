@@ -84,7 +84,7 @@ exports.userLogin = AsyncHandler( async (req, res) => {
       } else{
           //save user to req object
           //req.userAuth = user;
-          const token = generateToken(user._id);
+          const token = generateToken(user);
           const verify = verifyToken(token);
           return res.json({ 
               data: verify, token,
