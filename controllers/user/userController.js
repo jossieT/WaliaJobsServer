@@ -109,4 +109,49 @@ exports.getUserProfile = AsyncHandler( async (req, res)=>{
 
 exports.updateProfile = AsyncHandler( async (req, res)=>{
 
+    const {
+
+        fullName,
+        dateOfBirth,
+        gender,
+        phoneNumber,
+        address,
+        language,
+        facebook,
+        twitter,
+        instagram,
+    } = req.body;
+
+    let uploadedImageUrl;
+       if (req.file) {
+        let user = await User.findById(req.params.id);
+        let oldImageUrl = user.profilePicture;
+        if(oldImageUrl){
+          deleteImage(img);
+        }
+        uploadedImageUrl = await req.imageData.secure_url;
+       }
+
+       const userUpdate = await User.findByIdAndUpdate(req.params.id, {
+        fullName,
+        dateOfBirth,
+        gender,
+        phoneNumber,
+        address,
+        profilePicture: uploadedImageUrl,
+        language,
+        socialMediaProfiles: {
+            facebook,
+            twitter,
+            instagram
+        }  
+       },{
+        new: true,
+      });
+
+      res.status(201).json({
+        status: "success",
+        message: "User updated successfully",
+        data: userUpdate
+      })
 })
