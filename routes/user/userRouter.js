@@ -1,4 +1,4 @@
-const { registerUser, userLogin, getUserProfile } = require('../../controllers/user/userController');
+const { registerUser, userLogin, getUserProfile, updateProfile } = require('../../controllers/user/userController');
 const express = require('express');
 const isLoggedIn = require('../../middlewares/isLoggedIn');
 const { uploadImage } = require('../../controllers/uploadController');
@@ -10,5 +10,7 @@ userRouter.post('/register',upload.single('profilePicture'), uploadImage, regist
 userRouter.post('/login', userLogin);
 
 userRouter.get('/profile', isLoggedIn, getUserProfile);
+
+userRouter.put('profile/:id', isLoggedIn, updateProfile);
 
 module.exports = userRouter;
