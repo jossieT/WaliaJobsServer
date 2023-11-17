@@ -93,6 +93,10 @@ exports.userLogin = AsyncHandler( async (req, res) => {
     }
 })
 
+//@desc  Get profile
+//@route POST /api/v1/user/profile/
+//@access private
+
 exports.getUserProfile = AsyncHandler( async (req, res)=>{
 
     const user = await User.findById(req.userAuth._id).select("-password -createdAt -updatedAt");
@@ -107,6 +111,9 @@ exports.getUserProfile = AsyncHandler( async (req, res)=>{
     }
 })
 
+//@desc User Update
+//@route POST /api/v1/user/update/:id
+//@access private
 exports.updateProfile = AsyncHandler( async (req, res)=>{
 
     const {
@@ -154,4 +161,25 @@ exports.updateProfile = AsyncHandler( async (req, res)=>{
         message: "User updated successfully",
         data: userUpdate
       })
+})
+
+//@desc delete profile
+//@route POST /api/v1/user/delete/:id
+//@access private
+
+exports.deleteUser = AsyncHandler (async(req, res)=>{
+
+    const user = await User.findOne(req.params.id);
+    if(!user){
+        throw new Error("user not found");
+    }
+    if(user.profilePicture){
+        deleteImage(user.profilePicture);
+      }
+    await user.deleteOne();
+    
+    res.status(201).json({
+        status: "success",
+        message: "User deleted successfully",
+    })
 })
