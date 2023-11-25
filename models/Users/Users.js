@@ -21,11 +21,11 @@ const userSchema = new Schema({
       },
       gender: {
         type: String,
-        enum: ['Male', 'Female'],
-        required: true
+        enum: ['Male', 'Female']
       },
       phoneNumber: {
-        type: String
+        type: String,
+        required
       },
       address: {
         type: String
