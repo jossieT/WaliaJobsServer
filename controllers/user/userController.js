@@ -70,16 +70,18 @@ exports.userLogin = AsyncHandler( async (req, res) => {
 
     const user = await User.findOne({ email });
     if(!user){
-        return res.json({
-              message: ' Invalid user credencials or user not found'
+        return res.status(404).json({
+              status: "Bad Request",
+              message: 'USer not found with associated email'
           })
       }
 
       //verify password
       const isMatched = await passwordMatcher(password, user.password);
       if(!isMatched){
-          return res.json({
-              message: 'Invalid user credencials'
+          return res.status(401).json({
+              status: "Unauthorized",
+              message: 'Invalid password'
           })
       } else{
           //save user to req object
