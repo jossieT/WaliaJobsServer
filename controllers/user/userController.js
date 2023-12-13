@@ -86,14 +86,30 @@ exports.userLogin = AsyncHandler( async (req, res) => {
       } else{
           //save user to req object
           //req.userAuth = user;
-          const token = generateToken(user);
-          const verify = verifyToken(token);
+          let name = user.fullName;
+          const token = generateToken(res, user._id);
+          //const verify = verifyToken(token);
           return res.json({ 
-              data: verify, token,
+              status: "success",
+              data: name,
               message: "User logged in successfully"
       });
     }
 })
+
+//@desc User Logout
+//@route POST /api/v1/user/logout
+//@access public
+
+exports.userLogout = AsyncHandler(async (req, res)=>{
+    res.cookie('jwt', '', {
+        httpOnly: true,
+        expires: new Date(0)
+    })
+    res.status(200).json({
+        message: 'User logged out'
+    })
+});
 
 //@desc  Get profile
 //@route POST /api/v1/user/profile/
