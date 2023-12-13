@@ -1,7 +1,7 @@
 const AsyncHandler = require('express-async-handler');
 const User = require("../../models/Users/Users");
 const generateToken = require('../../utils/tokenGenerator');
-const verifyToken = require('../../utils/verifyToken');
+const verifyToken = require('../../utils/protect');
 const { passwordHasher, passwordMatcher } = require('../../utils/helpers');
 const { uploadImage, imageUrl } = require("../uploadController");
 const { deleteImage } = require("../../service/deleteService");
@@ -117,7 +117,7 @@ exports.userLogout = AsyncHandler(async (req, res)=>{
 
 exports.getUserProfile = AsyncHandler( async (req, res)=>{
 
-    const user = await User.findById(req.userAuth._id).select("-password -createdAt -updatedAt");
+    const user = await User.findById(req.user._id);
     if(!user){
         throw new Error(" User not found");
     }else{

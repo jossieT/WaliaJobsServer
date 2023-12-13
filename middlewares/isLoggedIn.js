@@ -1,6 +1,6 @@
 const Admin = require("../models/Users/Admins");
 const User = require("../models/Users/Users");
-const verifyToken = require("../utils/verifyToken");
+const verifyToken = require("../utils/protect");
 //const verifyToken = require("../utils/verifyToken");
 
 const isLoggedIn = async (req, res, next)=>{

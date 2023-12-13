@@ -12,6 +12,7 @@ const reviewRouter = require('../routes/content/reviewRouter');
 const cvRouter = require('../routes/cv/userCvRouter');
 const adminRouter = require('../routes/user/adminRouter');
 const userRouter = require('../routes/user/userRouter');
+const cookieParser = require('cookie-parser');
 
 
 //const uploadRouter = require('../routes/upload.route');
@@ -27,6 +28,7 @@ app.use((req, res, next) => {
   // Continue to the next middleware
   next();
 });
+app.use(cookieParser());
 app.use(express.json());
 //pass incoming json data
 app.use(morgan("dev"));

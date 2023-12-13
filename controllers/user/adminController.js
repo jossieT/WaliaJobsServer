@@ -2,7 +2,7 @@ const AsyncHandler = require('express-async-handler');
 const Admin = require('../../models/Users/Admins');
 const generateToken = require('../../utils/tokenGenerator');
 const bcrypt = require('bcryptjs');
-const verifyToken = require('../../utils/verifyToken');
+const verifyToken = require('../../utils/protect');
 const { passwordHasher, passwordMatcher } = require('../../utils/helpers');
 const User = require('../../models/Users/Users');
 
