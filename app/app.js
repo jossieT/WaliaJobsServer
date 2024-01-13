@@ -20,7 +20,8 @@ const app = express();
 
 //===Middlewares===
 
-app.use(cors({ credentials:true }));
+app.use(cors({ origin: 'https://walia-jobs-server.onrender.com/',
+  credentials:true }));
 
 app.use((req, res, next) => {
   // Set headers to allow cross-origin requests
