@@ -20,7 +20,7 @@ const app = express();
 
 //===Middlewares===
 
-app.use(cors({ origin:true, credentials:true }));
+app.use(cors({ credentials:true }));
 
 app.use((req, res, next) => {
   // Set headers to allow cross-origin requests
@@ -31,7 +31,7 @@ app.use((req, res, next) => {
   // Continue to the next middleware
   next();
 });
-app.use(cookieParser(config.cookiesKey));
+app.use(cookieParser());
 app.use(express.json());
 //pass incoming json data
 app.use(morgan("dev"));
