@@ -21,7 +21,7 @@ const app = express();
 //===Middlewares===
 
 app.use(cors({
-  origin: 'https://walia-jobs.vercel.app',
+  origin: true,
   credentials:true }));
 
 app.use((req, res, next) => {
