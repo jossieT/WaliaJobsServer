@@ -1,6 +1,6 @@
 const AsyncHandler = require('express-async-handler');
 const User = require("../../models/Users/Users");
-const generateToken = require('../../utils/tokenGenerator');
+const generateToken = require('../../utils/tokenGenerator.js');
 const verifyToken = require('../../utils/protect');
 const { passwordHasher, passwordMatcher } = require('../../utils/helpers');
 const { uploadImage, imageUrl } = require("../uploadController");

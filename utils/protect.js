@@ -5,9 +5,7 @@ const User = require('../models/Users/Users');
 
 const protect = AsyncHandler(async(req, res, next) =>{
     let token;
-    console.log('top', req.cookies);
     token = req.cookies.jwt;
-    console.log(req.cookies);
     if(token){
         try {
             const decoded = jwt.verify(token, 'anykey');
