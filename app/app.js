@@ -33,7 +33,7 @@ app.use((req, res, next) => {
   // Continue to the next middleware
   next();
 });
-app.use(express.cookieParser());
+app.use(cookieParser());
 app.use(express.json());
 //pass incoming json data
 app.use(morgan("dev"));
