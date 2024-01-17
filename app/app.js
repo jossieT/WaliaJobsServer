@@ -19,7 +19,7 @@ const cors = require('cors');
 const app = express();
 
 //===Middlewares===
-
+app.use(cookieParser());
 app.use(cors({
   
   credentials:true }));
@@ -33,7 +33,6 @@ app.use((req, res, next) => {
   // Continue to the next middleware
   next();
 });
-app.use(cookieParser());
 app.use(express.json());
 //pass incoming json data
 app.use(morgan("dev"));
