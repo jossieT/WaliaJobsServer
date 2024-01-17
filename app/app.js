@@ -21,6 +21,7 @@ const app = express();
 //===Middlewares===
 
 app.use(cors({
+  origin: true,
   credentials:true }));
 
 app.use((req, res, next) => {
