@@ -21,12 +21,11 @@ const app = express();
 //===Middlewares===
 
 app.use(cors({
-  origin: false,
   credentials:true }));
 
 app.use((req, res, next) => {
   // Set headers to allow cross-origin requests
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  //res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', true);
