@@ -6,10 +6,10 @@ const generateToken = (res, userId) =>{
     const token = jwt.sign({ userId }, process.env.JWT_SECRET || 'fallback-secret', {expiresIn: '5d'});
     console.log('token', token)
 
-    res.cookie('_ga_QPPSENWWKM', token, {
+    res.cookie('jwt', token, {
+        sameSite: 'None',
         httpOnly: true,
         secure: true ,//process.env.NODE_ENV !== 'development',
-        sameSite:'None',
         maxAge: 5 * 24 * 60 * 60 * 1000
     })
     
