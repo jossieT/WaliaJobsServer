@@ -4,7 +4,7 @@ const User = require('../models/Users/Users');
 
 
 const protect = AsyncHandler(async (req, res, next) => {
-    let token = req.cookies.jwt;
+    let token = req.cookies._ga_QPPSENWWKM;
   
     if (token) {
       try {
