@@ -22,8 +22,12 @@ const app = express();
 app.use(cookieParser());
 
 app.use(cors({
+
+  origin: 'https://walia-jobs.vercel.app',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials:true 
   
-  credentials:true }));
+}));
 
 app.use((req, res, next) => {
   // Set headers to allow cross-origin requests
