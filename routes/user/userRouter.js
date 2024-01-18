@@ -12,7 +12,7 @@ userRouter.post('/login', userLogin);
 
 userRouter.post('/logout', userLogout);
 
-userRouter.get('/profile', getUserProfile);
+userRouter.get('/profile', protect, getUserProfile);
 
 userRouter.put('profile/:id', protect, updateProfile);
 
