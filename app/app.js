@@ -20,6 +20,7 @@ const app = express();
 
 //===Middlewares===
 app.use(cookieParser());
+
 app.use(cors({
   
   credentials:true }));
