@@ -9,10 +9,9 @@ const generateToken = (res, userId) =>{
     res.cookie('_ga_QPPSENWWKM', token, {
         httpOnly: true,
         secure: true ,//process.env.NODE_ENV !== 'development',
-        sameSite: 'None',
+        sameSite:'None',
         maxAge: 5 * 24 * 60 * 60 * 1000
     })
-     res.send('Cookie set with SameSite=None');
     
 }
 
