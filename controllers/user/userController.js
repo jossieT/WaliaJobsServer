@@ -121,9 +121,9 @@ exports.getUserProfile = AsyncHandler( async (req, res)=>{
     if(!user){
         throw new Error(" User not found");
     }else{
-        console.log(user);
+        //console.log(user);
         res.status(200).json({
-            status: "success",
+            status: "Success",
             data: user,
             message: "User profile fetched successfully"
         })

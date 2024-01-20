@@ -1,13 +1,26 @@
 require('dotenv').config()
 const http = require('http');
 const app = require('./app/app');
+const express = require('express');
+//const app = express();
 const dbConnect = require('./config/dbConnect');
+const { error } = require('console');
 const PORT = process.env.PORT || 2016;
 
 
-//creating the server
-const server = http.createServer(app);
-server.listen(PORT, console.log(`Walia Server is running on port ${PORT}`));
-
 //starting mongodb server
-dbConnect();
+dbConnect()
+.then(()=>{
+    //creating and starting the server
+    app.listen(PORT, ()=>{
+        console.log(`Walia Server is running on port ${PORT}`);
+    })
+})
+.catch((error)=>{
+    console.error('Failed to connect to MongoDB:', error);
+})
+
+
+
+
+

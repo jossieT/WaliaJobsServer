@@ -14,7 +14,6 @@ const adminRouter = require('../routes/user/adminRouter');
 const userRouter = require('../routes/user/userRouter');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-
 //const uploadRouter = require('../routes/upload.route');
 const app = express();
 

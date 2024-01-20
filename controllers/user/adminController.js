@@ -15,7 +15,7 @@ exports.registerAdmnCtrl = AsyncHandler (async (req, res)=>{
         //cheking if email exists
         const adminFound = await Admin.findOne({ email });
         if(adminFound){
-           throw new Error ("Admin exist");
+           throw new Error ("Admin user exist with provided email");
         }
         //hash the password 
         const hashedPassword = await passwordHasher(password);
@@ -31,7 +31,7 @@ exports.registerAdmnCtrl = AsyncHandler (async (req, res)=>{
         res.status(201).json({
             status: "success",
             data: user,
-            message: "Admin Registered successfully"
+            message: "Admin registration successful"
         })
 })
 
@@ -56,15 +56,29 @@ exports.adminLgnCtrl = AsyncHandler (async (req, res)=>{
         })
     } else{
         //save user to req object
-        req.userAuth = user;
-        const token = generateToken(user);
-        const verify = verifyToken(token);
+        //req.userAuth = user;
+        generateToken(res, user._id);
         return res.json({ 
-            data: verify, token,
+            status:"Success",
+            data: user.fullName,
             message: "Admin logged in successfully"
     });
     }
 })
+
+//@desc admin logout
+//@route POST /api/v1/admin/logout
+//@access private
+
+exports.adminLogout = AsyncHandler(async (req, res)=>{
+    res.cookie('jwt', '', {
+        httpOnly: true,
+        expires: new Date(0)
+    })
+    res.status(200).json({
+        message: 'Admin logged out'
+    })
+});
 
 //@desc get all admins
 //@route GET /api/v1/admins/
@@ -86,7 +100,7 @@ exports.getAllAdmnsCtrl = AsyncHandler (async (req, res)=>{
 
 exports.getAdminProfileCtrl = AsyncHandler (async (req, res)=>{
     //console.log(req.userAuth);
-    const admin = await Admin.findById(req.userAuth._id).select("-password -createdAt -updatedAt");
+    const admin = await Admin.findById(req.admin._id).select("-password -createdAt -updatedAt");
     if(!admin){
         throw new Error(" Admin not found");
     }else{
@@ -105,11 +119,11 @@ exports.getAdminProfileCtrl = AsyncHandler (async (req, res)=>{
 exports.getAllUsers = AsyncHandler ( async (req, res)=>{
     
     const users = await User.find({});
-    if(!users){
+    if(users.length === 0){
         throw new Error("No user record found");
     }
 
-    res.status(201).json({
+    res.status(200).json({
         status: "Success",
         message: "All user fetched successfully",
         data: users
