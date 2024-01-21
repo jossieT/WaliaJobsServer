@@ -5,7 +5,7 @@ const express = require('express');
 //const app = express();
 const dbConnect = require('./config/dbConnect');
 const { error } = require('console');
-const PORT = process.env.PORT || 2016;
+const PORT = process.env.PORT || 2016
 
 
 //starting mongodb server
