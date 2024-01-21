@@ -20,7 +20,9 @@ const blogSchema = new Schema({
         required: true
     },
     createdBy: {
-        type: String
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Admin', 
+        required: true 
     },
     img: {
         type: String,

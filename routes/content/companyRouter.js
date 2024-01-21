@@ -1,6 +1,7 @@
 const express = require("express");
 const { uploadImage } = require('../../controllers/uploadController');
 const { upload } = require('../../service/uploadService');
+const { protect } = require("../../utils/protect");
 
 const {
 

@@ -1,7 +1,6 @@
 const express = require("express");
 const { uploadImage } = require('../../controllers/uploadController');
 const { upload } = require('../../service/uploadService');
-
 const {
 
     addNewBlog,
@@ -12,6 +11,7 @@ const {
     searchBlog
 
 } = require("../../controllers/content/blogController");
+const { protect } = require("../../utils/protect");
 // const isAdmin = require("../../middlewares/isAdmin");
 // const isLoggedin = require("../../middlewares/isLogin");
 
@@ -20,14 +20,14 @@ const blogRouter = express.Router();
 
 blogRouter
   .route("/")
-  .post(upload.single('img'), uploadImage, addNewBlog)
+  .post(upload.single('img'),protect, uploadImage, addNewBlog)
   .get(getAllBlogs)
 
   blogRouter
   .route("/:id")
   .get(getSingleBlog)
-  .put(upload.single('img'), uploadImage, updateBlog)
-  .delete(deleteBlog);
+  .put(upload.single('img'), protect, uploadImage, updateBlog)
+  .delete(protect, deleteBlog);
 
   blogRouter.get("/search/:key", searchBlog);
 

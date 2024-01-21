@@ -23,6 +23,10 @@ exports.addNewBlog= AysncHandler(async (req, res) => {
      if (req.file) {
        uploadedImageUrl = await req.imageData.secure_url;
    }
+
+   //getting the authenticated admin user
+   const adminUser = req.admin;
+
    //checking if the blog exist
    const blogFound = await Blogs.findOne({ title });
    if (blogFound) {
@@ -34,7 +38,7 @@ exports.addNewBlog= AysncHandler(async (req, res) => {
     blogCategory,
     author,
     description,
-    createdBy:"Admin",
+    createdBy: adminUser._id,
     img: uploadedImageUrl
    });
    
