@@ -20,11 +20,11 @@ const app = express();
 //===Middlewares===
 app.use(cookieParser());
 
-app.set('trust proxy', 1);
+//app.set('trust proxy', 1);
 app.use(cors({
 
   origin: 'https://walia-jobs.vercel.app',
-  credentials:true 
+  credentials:true
   
 }));
 
