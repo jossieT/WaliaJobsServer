@@ -6,15 +6,15 @@ const {
     getSingleReview,
     deleteReview
 } = require('../../controllers/content/reviewController');
-
+const { userProtect } = require('../../utils/protect');
 const reviewRouter = express.Router();
 
 reviewRouter.route("/")
-.post(addNewReview)
+.post(userProtect ,addNewReview)
 .get(getAllReviews);
 
 reviewRouter.route("/:id")
 .get(getSingleReview)
-.delete(deleteReview);
+.delete(userProtect, deleteReview);
 
 module.exports = reviewRouter;

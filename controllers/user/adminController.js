@@ -1,6 +1,6 @@
 const AsyncHandler = require('express-async-handler');
 const Admin = require('../../models/Users/Admins');
-const generateToken = require('../../utils/tokenGenerator');
+    const { generateToken, generateAdminToken }  = require('../../utils/tokenGenerator');
 const bcrypt = require('bcryptjs');
 const verifyToken = require('../../utils/protect');
 const { passwordHasher, passwordMatcher } = require('../../utils/helpers');
@@ -57,7 +57,7 @@ exports.adminLgnCtrl = AsyncHandler (async (req, res)=>{
     } else{
         //save user to req object
         //req.userAuth = user;
-        generateToken(res, user._id);
+        generateAdminToken(res, user._id);
         return res.json({ 
             status:"Success",
             data: user.fullName,
@@ -71,7 +71,7 @@ exports.adminLgnCtrl = AsyncHandler (async (req, res)=>{
 //@access private
 
 exports.adminLogout = AsyncHandler(async (req, res)=>{
-    res.cookie('jwt', '', {
+    res.cookie('admincookie', '', {
         httpOnly: true,
         expires: new Date(0)
     })

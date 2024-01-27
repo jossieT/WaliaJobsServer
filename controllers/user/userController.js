@@ -1,6 +1,6 @@
 const AsyncHandler = require('express-async-handler');
 const User = require("../../models/Users/Users");
-const generateToken = require('../../utils/tokenGenerator.js');
+const { generateToken, generateAdminToken } = require('../../utils/tokenGenerator.js');
 const verifyToken = require('../../utils/protect');
 const { passwordHasher, passwordMatcher } = require('../../utils/helpers');
 const { uploadImage, imageUrl } = require("../uploadController");
@@ -102,7 +102,7 @@ exports.userLogin = AsyncHandler( async (req, res) => {
 //@access public
 
 exports.userLogout = AsyncHandler(async (req, res)=>{
-    res.cookie('jwt', '', {
+    res.cookie('usercookie', '', {
         httpOnly: true,
         expires: new Date(0)
     })
@@ -150,7 +150,7 @@ exports.updateProfile = AsyncHandler( async (req, res)=>{
 
     let uploadedImageUrl;
        if (req.file) {
-        let user = await User.findById(req.params.id);
+        let user = await User.findById(req.user._id);
         let oldImageUrl = user.profilePicture;
         if(oldImageUrl){
           deleteImage(img);
@@ -188,7 +188,7 @@ exports.updateProfile = AsyncHandler( async (req, res)=>{
 
 exports.deleteUser = AsyncHandler (async(req, res)=>{
 
-    const user = await User.findOne(req.params.id);
+    const user = await User.findOne(req.user._id);
     if(!user){
         throw new Error("user not found");
     }

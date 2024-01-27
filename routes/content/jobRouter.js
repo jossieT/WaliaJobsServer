@@ -12,6 +12,7 @@ const {
     deleteAllJobs
 } = require("../../controllers/content/jobController");
 const imageUpload = require("../../middlewares/imageUpload");
+const { adminProtect } = require("../../utils/protect");
 
 // const isAdmin = require("../../middlewares/isAdmin");
 // const isLoggedin = require("../../middlewares/isLogin");
@@ -21,15 +22,15 @@ const jobRouter = express.Router();
 
 jobRouter
   .route("/")
-  .post(upload.single('img'), uploadImage, createJob)
+  .post(upload.single('img'), adminProtect, uploadImage, createJob)
   .get(getAllJobs)
-  .delete(deleteAllJobs);
+  .delete(adminProtect, deleteAllJobs);
 
   jobRouter
   .route("/:id")
   .get(getSingleJob)
-  .put(upload.single('img'), uploadImage, updateJob)
-  .delete(deleteJob);
+  .put(upload.single('img'), adminProtect, uploadImage, updateJob)
+  .delete(adminProtect, deleteJob);
 
   jobRouter.get("/search/:key", searchJob);
 
