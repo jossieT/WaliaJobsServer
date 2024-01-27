@@ -5,7 +5,7 @@ const { response } = require("express");
 const fs = require('fs');
 const { uploadImage, imageUrl } = require("../uploadController");
 const { deleteImage } = require("../../service/deleteService");
-const Company = require("../../models/Contents/Companies");
+const { Company } = require("../../models/Contents/Companies");
 
 //@desc  Create Job
 //@route POST /api/v1/Jobs
@@ -48,7 +48,7 @@ exports.createJob = AysncHandler(async (req, res) => {
   }
   let imageUrl;
   const imgCompany = await Company.findOne({name: companyName});
-    console.log(imgCompany.name);
+    console.log(imgCompany);
     if(imgCompany){
      imageUrl = imgCompany.companyLogo;
     }else{
@@ -87,11 +87,14 @@ exports.createJob = AysncHandler(async (req, res) => {
   });
     //find company using company name and assign object Id of this job
     const company = await Company.findOne({name: jobCreated.companyName});
-    console.log(company.name);
+    console.log(company);
     if(company){
      company.jobs.push(jobCreated._id);
+    await  company.save();
+    }else {
+      console.log('Company not found');
     }
-    company.save();
+    
 
     res.status(201).json({
     status: "success",
