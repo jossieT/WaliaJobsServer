@@ -16,6 +16,7 @@ const generateToken = (res, userId) =>{
 const generateAdminToken = (res, adminId) =>{
     // const userId = userId;
     // const role = user.role;
+    console.log(adminId);
      const token = jwt.sign({ adminId }, process.env.JWT_SECRET || 'fallback-secret', {expiresIn: '5d'});
      console.log('token', token)
  

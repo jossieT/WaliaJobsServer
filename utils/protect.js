@@ -41,9 +41,10 @@ const userProtect = AsyncHandler(async (req, res, next) => {
           return res.status(401).json({ error: 'Token has expired' });
         }
        
-        const authAdmin = await Admin.findById(decoded.userId);
+        const authAdmin = await Admin.findById(decoded.adminId);
+  
         if(authAdmin){
-          req.admin = await Admin.findById(decoded.userId).select('-password');
+          req.admin = await Admin.findById(decoded.adminId).select('-password');
         }
         next();
       } catch (error) {

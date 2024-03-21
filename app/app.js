@@ -23,8 +23,8 @@ app.use(cookieParser());
 //app.set('trust proxy', 1);
 app.use(cors({
 
-  origin: 'http://localhost:5173',
-  //origin: 'https://walia-jobs.vercel.app',
+  //origin: 'http://localhost:5173',
+  origin: 'https://walia-jobs.vercel.app',
   credentials:true
   
 }));
