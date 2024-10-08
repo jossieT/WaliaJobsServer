@@ -30,9 +30,9 @@ app.use(cors({
 }));
 
 app.use((req, res, next) => {
-//   // Set headers to allow cross-origin requests
-//   res.setHeader('Access-Control-Allow-Origin', 'https://walia-jobs.vercel.app');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  // Set headers to allow cross-origin requests
+  res.setHeader('Access-Control-Allow-Origin', 'https://walia-jobs.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 //   res.setHeader('Access-Control-Allow-Credentials', true);
 //   // Continue to the next middleware
