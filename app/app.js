@@ -14,6 +14,7 @@ const adminRouter = require('../routes/user/adminRouter');
 const userRouter = require('../routes/user/userRouter');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const { swaggerDocs } = require('../swagger');
 //const uploadRouter = require('../routes/upload.route');
 const app = express();
 
@@ -38,6 +39,8 @@ app.use((req, res, next) => {
 //   // Continue to the next middleware
    next();
 });
+
+swaggerDocs(app);
 app.use(express.json());
 //pass incoming json data
 app.use(morgan("dev"));
