@@ -9,17 +9,11 @@ const userRouter = express.Router();
 
 
 userRouter.post('/register', upload.single('profilePicture'), uploadImage, registerUser);
-
 userRouter.post('/login', userLogin);
-
 userRouter.post('/logout', userLogout);
-
 userRouter.get('/profile', userProtect, getUserProfile);
-
 userRouter.put('profile/:id', userProtect, updateProfile);
-
 userRouter.delete('delete/:id', userProtect, deleteUser);
-
 userRouter.post('/forgot-password', forgotPassword);
 userRouter.patch('/reset-password/:token', resetPassword);
 
