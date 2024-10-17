@@ -37,7 +37,7 @@ blogRouter
  *   post:
  *     summary: Admin creates a new blog post
  *     tags: 
- *       - [Blogs, Admin]
+ *       - Blogs
  *     security:
  *       - BearerAuth: []
  *     description: Allows an admin to create a new blog post. Admin must be authenticated.

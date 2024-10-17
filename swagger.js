@@ -19,7 +19,7 @@ const options = {
         description: "Local server"
       },
       {
-        url: "https://walia-jobs-server.onrender.com",
+        url: "https://walia-jobs-server.onrender.com/",
         description: "Live server"
       },
     ]

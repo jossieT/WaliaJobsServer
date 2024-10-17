@@ -23,7 +23,7 @@ adminRouter.get('/users', adminProtect, getAllUsers);
      * '/api/v1/admin/register':
      *  post:
      *     tags:
-     *     - [Auth, Admin]
+     *     - Admin
      *     summary: Register admin
      *     requestBody:
      *      required: true
@@ -109,7 +109,7 @@ adminRouter.get('/users', adminProtect, getAllUsers);
      * '/api/v1/admin/login':
      *  post:
      *     tags:
-     *     - [Auth, Admin]
+     *     - Admin
      *     summary: Admin login with email and password
      *     requestBody:
      *      required: true
@@ -180,7 +180,7 @@ adminRouter.get('/users', adminProtect, getAllUsers);
      * '/api/v1/admin/logout':
      *  post:
      *     tags:
-     *     - [Auth, Admin]
+     *     - Admin
      *     summary: Log out the current Admin
      *     security:
      *       - bearerAuth: []
@@ -246,7 +246,7 @@ adminRouter.get('/users', adminProtect, getAllUsers);
  * '/api/v1/admin/profile':
  *  get:
  *     tags:
- *     - [Auth, Admin]
+ *     - Admin
  *     summary: Get the authenticated admin's profile
  *     security:
  *       - bearerAuth: []
@@ -290,7 +290,7 @@ adminRouter.get('/users', adminProtect, getAllUsers);
  *   get:
  *     summary: Get list of all users
  *     tags: 
- *       - Admin Role
+ *       - Admin
  *     security:
  *       - BearerAuth: []
  *     description: Retrieve a list of all users. Only accessible by admin users.

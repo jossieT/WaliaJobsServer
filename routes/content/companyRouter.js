@@ -36,7 +36,7 @@ companyRouter
  * @swagger
  * /api/v1/companies:
  *   post:
- *     summary: Create a new company (Admin only)
+ *     summary: Create a new company profile (Admin only)
  *     tags: 
  *       - Companies
  *     description: Allows an admin to create a new company.
@@ -128,7 +128,7 @@ companyRouter
  *     summary: Get all companies
  *     tags: 
  *       - Companies
- *     description: Retrieve a list of all companies. Accessible by any authenticated user.
+ *     description: Retrieve a list of all companies.
  *     security:
  *       - BearerAuth: []
  *     responses:

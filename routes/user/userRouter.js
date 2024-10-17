@@ -23,7 +23,7 @@ userRouter.patch('/reset-password/:token', resetPassword);
      * '/api/v1/user/register':
      *  post:
      *     tags:
-     *     - [Auth]
+     *     - Auth User
      *     summary: Register as a user
      *     requestBody:
      *      required: true
@@ -109,7 +109,7 @@ userRouter.patch('/reset-password/:token', resetPassword);
      * '/api/v1/user/login':
      *  post:
      *     tags:
-     *     - [Auth]
+     *     - Auth User
      *     summary: User login with email and password
      *     requestBody:
      *      required: true
@@ -180,7 +180,7 @@ userRouter.patch('/reset-password/:token', resetPassword);
      * '/api/v1/user/logout':
      *  post:
      *     tags:
-     *     - [Auth]
+     *     - Auth User
      *     summary: Log out the current user
      *     security:
      *       - bearerAuth: []
@@ -246,7 +246,7 @@ userRouter.patch('/reset-password/:token', resetPassword);
  * '/api/v1/user/profile':
  *  get:
  *     tags:
- *     - [Auth]
+ *     - Auth User
  *     summary: Get the authenticated user's profile
  *     security:
  *       - bearerAuth: []
@@ -290,7 +290,7 @@ userRouter.patch('/reset-password/:token', resetPassword);
  * '/api/v1/user/profile/{id}':
  *  put:
  *     tags:
- *     - [Auth]
+ *     - Auth User
  *     summary: Update user profile by ID
  *     security:
  *       - bearerAuth: []
@@ -339,7 +339,7 @@ userRouter.patch('/reset-password/:token', resetPassword);
  * '/api/v1/user/delete/{id}':
  *  delete:
  *     tags:
- *     - [Auth]
+ *     - Auth User
  *     summary: Delete user by ID
  *     security:
  *       - bearerAuth: []
@@ -375,7 +375,7 @@ userRouter.patch('/reset-password/:token', resetPassword);
  * '/api/v1/user/forgot-password':
  *  post:
  *     tags:
- *     - [Auth]
+ *     - Auth User
  *     summary: Forgot password
  *     description: Sends a password reset link to the user's email.
  *     requestBody:
@@ -411,7 +411,7 @@ userRouter.patch('/reset-password/:token', resetPassword);
  * '/api/v1/user/reset-password/{token}':
  *  patch:
  *     tags:
- *     - [Auth]
+ *     - Auth User
  *     summary: Reset password using token
  *     description: Resets the user's password using a token from the password reset email.
  *     parameters:
